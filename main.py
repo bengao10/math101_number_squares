@@ -6,6 +6,7 @@
 #############################
 import cvxpy as cp
 import matplotlib.pyplot as plt
+
 ORDER = ["top left", "top right", "bottom right", "bottom left"]
 
 
@@ -25,6 +26,7 @@ def find_distribution():
                 for y in range(sums):
                     callable([i, j, x, y], totals)
     plot(totals)
+    print(totals)
 
 
 def plot(totals):
@@ -43,7 +45,7 @@ def manual_input():
         nums.append(float(input(f"Please enter the {ORDER[i]} number: ")))
     total_steps = 0
     while True:
-        print(f"{nums}, distance: {distance_test(nums)}")
+        print(f"{nums}, distance: {return_max(nums)}")
         if nums[0] == 0 and nums[1] == 0 and nums[2] == 0 and nums[3] == 0:
             break
         total_steps += 1
@@ -51,9 +53,13 @@ def manual_input():
     print(f"Terminated in {total_steps} steps")
 
 
+def return_max(config):
+    return max(config[0], config[1], config[2], config[3])
+
+
 def distance_test(config):
     x = cp.Variable(1)
-    objective = cp.Minimize((config[0] - x)**2 + (config[1] - x)**2 + (config[2] - x)**2 + (config[3] - x)**2)
+    objective = cp.Minimize((config[0] - x) ** 2 + (config[1] - x) ** 2 + (config[2] - x) ** 2 + (config[3] - x) ** 2)
     constraints = [-10000 <= x, x <= 10000]
     prob = cp.Problem(objective, constraints)
     prob.solve()
