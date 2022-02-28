@@ -4,6 +4,8 @@
 ## Last Edit: B^2 2/9/2022
 ## Notes: Second Iteration
 #############################
+import math
+
 import cvxpy as cp
 import matplotlib.pyplot as plt
 
@@ -13,7 +15,6 @@ ORDER = ["top left", "top right", "bottom right", "bottom left"]
 def main():
     # find_distribution()
     manual_input()
-    # callable()
 
 
 def find_distribution():
@@ -40,9 +41,10 @@ def plot(totals):
 
 
 def manual_input():
-    nums = list()
-    for i in range(4):
-        nums.append(float(input(f"Please enter the {ORDER[i]} number: ")))
+    # nums = list()
+    # for i in range(4):
+    #     nums.append(float(input(f"Please enter the {ORDER[i]} number: ")))
+    nums = [math.pi, math.e, math.sqrt(2), math.sqrt(3)]
     total_steps = 0
     while True:
         print(f"{nums}, distance: {return_max(nums)}")
